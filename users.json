@@ -1,0 +1,45 @@
+{
+  "users": [
+    {
+      "user_id": "admin_001",
+      "username": "admin",
+      "role": "admin",
+      "eth_address": null,
+      "email": "admin@harmlens.ai",
+      "created_at": "2026-02-07T16:57:55.685912",
+      "last_login": "2026-02-07T18:02:51.104199",
+      "permissions": [
+        "view_content",
+        "analyze_content",
+        "view_audit_log",
+        "export_audit_log",
+        "manage_queue",
+        "review_content",
+        "escalate",
+        "manage_users",
+        "view_blockchain",
+        "verify_blockchain"
+      ]
+    },
+    {
+      "user_id": "moderator_001",
+      "username": "moderator",
+      "role": "moderator",
+      "eth_address": "0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb",
+      "email": "moderator@harmlens.ai",
+      "created_at": "2026-02-07T23:00:00",
+      "last_login": "2026-02-07T18:07:55.893322",
+      "permissions": [
+        "view_content",
+        "analyze_content",
+        "view_audit_log",
+        "export_audit_log",
+        "manage_queue",
+        "review_content",
+        "escalate",
+        "view_blockchain",
+        "verify_blockchain"
+      ]
+    }
+  ]
+}

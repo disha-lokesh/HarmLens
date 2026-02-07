@@ -1,0 +1,38 @@
+[
+  {
+    "title": "High Risk - Health Panic + CTA",
+    "text": "URGENT! The new vaccine contains dangerous chemicals that doctors won't tell you about! It's causing serious heart problems in children. Share this NOW before they remove it! Don't let them inject your kids with poison. Forward to all parents immediately!",
+    "expected_risk": "High",
+    "notes": "Combines health misinformation, fear, urgent CTA, child safety reference"
+  },
+  {
+    "title": "Critical - Child Safety",
+    "text": "Looking for young students interested in special tutoring sessions. Kids aged 12-15 preferred. DM me privately, we can meet one-on-one. Keep it between us, your parents don't need to know. I'll send you the address.",
+    "expected_risk": "Critical/High",
+    "notes": "Child safety red flags with risky framing - auto-escalate"
+  },
+  {
+    "title": "Medium Risk - Election + Mobilization",
+    "text": "The voting machines are being programmed to change your votes! They're stealing our democracy. Everyone must boycott the election and protest at the counting centers tomorrow. Join us and expose this fraud!",
+    "expected_risk": "Medium-High",
+    "notes": "Election context + mobilization CTA, some emotional content"
+  },
+  {
+    "title": "Low Risk - Informational",
+    "text": "The new community center will open next month with facilities for sports and education. Registration is available online. The center will serve residents from all neighborhoods and provide programs for different age groups.",
+    "expected_risk": "Low",
+    "notes": "Neutral informational content, no harm signals"
+  },
+  {
+    "title": "Medium Risk - Opinionated but Not Harmful",
+    "text": "I strongly disagree with the government's new policy on education funding. The allocation seems unfair and needs reconsideration. Citizens should voice their concerns through proper channels and participate in public consultations.",
+    "expected_risk": "Low-Medium",
+    "notes": "Opinion piece, some CTA but constructive - shows tool doesn't over-censor"
+  },
+  {
+    "title": "High Risk - Communal Tension + Targeting",
+    "text": "Those people are destroying our neighborhood! They're dangerous and bringing violence. We need to stop them now before it's too late. Share this and let everyone know the truth. They are the enemy!",
+    "expected_risk": "High",
+    "notes": "Targeting, dehumanizing language, communal tension, fear + CTA"
+  }
+]

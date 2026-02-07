@@ -1,0 +1,26 @@
+{
+  "health": [
+    "vaccine", "vaccination", "cure", "treatment", "medicine", "covid", "coronavirus",
+    "virus", "disease", "pandemic", "epidemic", "health", "doctor", "hospital",
+    "medical", "drug", "pharmacy", "remedy", "symptom", "infection", "immunity",
+    "antibodies", "side effects", "clinical", "diagnosis", "patient"
+  ],
+  "election": [
+    "vote", "voting", "election", "ballot", "candidate", "polling", "poll",
+    "evm", "rigged", "fraud", "manipulation", "counting", "results",
+    "campaign", "political", "party", "minister", "government", "mp", "mla",
+    "constituency", "booth", "electoral", "democracy", "opposition"
+  ],
+  "communal": [
+    "riot", "clash", "violence", "attack", "mob", "lynching",
+    "tension", "conflict", "religious", "community", "minority",
+    "majority", "protest", "demonstration", "communal", "sectarian",
+    "ethnic", "hatred", "tolerance", "harmony"
+  ],
+  "disaster": [
+    "earthquake", "flood", "fire", "cyclone", "storm", "disaster",
+    "emergency", "evacuation", "rescue", "danger", "warning",
+    "alert", "calamity", "tragedy", "destruction", "tsunami",
+    "hurricane", "tornado", "drought", "landslide", "crisis"
+  ]
+}

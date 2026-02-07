@@ -1,0 +1,20 @@
+__pycache__/
+*.pyc
+*.pyo
+.env
+.env.blockchain
+*.db
+.venv/
+venv/
+logs/*.csv
+.streamlit/
+
+# Blockchain
+blockchain_sim/
+contracts/ModerationAudit_abi.json
+*.key
+*.pem
+
+# IPFS
+.ipfs/
+ipfs_data/

@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  harmlens-api:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - USE_BLOCKCHAIN=false
+      - DATABASE_PATH=/app/data/harmlens.db
+    volumes:
+      - ./data:/app/data
+      - ./logs:/app/logs
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Optional: Add Ganache for blockchain
+  ganache:
+    image: trufflesuite/ganache:latest
+    ports:
+      - "8545:8545"
+    command: --deterministic --accounts 10
+    restart: unless-stopped
+
+  # Optional: Add IPFS
+  ipfs:
+    image: ipfs/kubo:latest
+    ports:
+      - "4001:4001"
+      - "5001:5001"
+      - "8080:8080"
+    volumes:
+      - ./ipfs_data:/data/ipfs
+    restart: unless-stopped

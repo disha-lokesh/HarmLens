@@ -1,0 +1,29 @@
+# Vision Models for Image and Video Moderation
+# Install with: pip install -r requirements_vision.txt
+
+# Core ML frameworks
+torch>=2.0.0
+torchvision>=0.15.0
+
+# Transformers for pretrained models
+transformers>=4.30.0
+
+# Image processing
+Pillow>=9.5.0
+opencv-python>=4.8.0
+
+# Additional vision libraries
+timm>=0.9.0  # PyTorch Image Models
+
+# OCR for text extraction from images
+easyocr>=1.7.0  # Easy-to-use OCR
+# OR use TrOCR (included in transformers)
+
+# Speech recognition for video audio
+librosa>=0.10.0  # Audio processing
+soundfile>=0.12.0  # Audio file I/O
+# moviepy>=1.0.3  # Alternative for audio extraction
+
+# Optional: For GPU acceleration
+# torch-cuda  # Uncomment if using CUDA
+# torch-mps   # Uncomment if using Apple Silicon
