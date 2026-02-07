@@ -11,7 +11,51 @@ from datetime import datetime
 import pandas as pd
 
 # API Configuration
-API_BASE = "http://localhost:8000"
+# Priority: Streamlit secrets > Environment variable > localhost
+import os
+try:
+    API_BASE = st.secrets.get("API_BASE_URL", os.getenv("API_BASE_URL", "http://localhost:8000"))
+    DEMO_MODE = st.secrets.get("DEMO_MODE", os.getenv("DEMO_MODE", "false")).lower() == "true"
+except:
+    API_BASE = os.getenv("API_BASE_URL", "http://localhost:8000")
+    DEMO_MODE = os.getenv("DEMO_MODE", "false").lower() == "true"
+
+
+def get_mock_response(endpoint, method="GET", data=None):
+    """Return mock data for demo mode"""
+    if "/auth/login" in endpoint:
+        return {
+            "token": "demo_token_12345",
+            "user": {
+                "user_id": data.get("user_id", "demo_001"),
+                "username": data.get("username", "demo"),
+                "role": "moderator" if "moderator" in data.get("username", "") else "admin",
+                "email": "demo@harmlens.ai",
+                "permissions": ["view_content", "analyze_content", "view_audit_log", "manage_queue", "escalate"]
+            },
+            "message": "Login successful (Demo Mode)"
+        }
+    elif "/blockchain/stats" in endpoint:
+        return {
+            "connected": True,
+            "mode": "Demo Mode",
+            "network": "Simulation"
+        }
+    elif "/auth/users" in endpoint:
+        return {
+            "users": [
+                {"username": "admin", "user_id": "admin_001", "role": "admin", "email": "admin@demo.com"},
+                {"username": "moderator", "user_id": "moderator_001", "role": "moderator", "email": "mod@demo.com"}
+            ]
+        }
+    elif "/audit/logs" in endpoint:
+        return {
+            "logs": [],
+            "accessed_by": {"username": "demo", "role": "moderator"},
+            "timestamp": "2026-02-07T12:00:00"
+        }
+    else:
+        return {"status": "ok", "message": "Demo mode - no real data"}
 
 # Page config
 st.set_page_config(
@@ -323,6 +367,11 @@ if 'page' not in st.session_state:
 
 def api_request(endpoint, method="GET", data=None, auth_required=True):
     """Make API request with authentication and retry logic"""
+    
+    # Demo mode - return mock data
+    if DEMO_MODE:
+        return get_mock_response(endpoint, method, data)
+    
     headers = {"Content-Type": "application/json"}
     
     if auth_required and st.session_state.token:
@@ -516,6 +565,10 @@ def login_page():
 def sidebar():
     """Sidebar navigation - different styling for admin vs moderator"""
     with st.sidebar:
+        # Demo mode banner
+        if DEMO_MODE:
+            st.warning("🎭 **DEMO MODE**\n\nUsing mock data. No real API connection.")
+        
         user_role = st.session_state.user['role']
         
         # Different styling based on role
