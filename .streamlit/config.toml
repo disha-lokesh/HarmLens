@@ -1,0 +1,14 @@
+[theme]
+# Dark mode theme configuration
+primaryColor = "#4a9eff"
+backgroundColor = "#0e1117"
+secondaryBackgroundColor = "#1a1d29"
+textColor = "#fafafa"
+font = "sans serif"
+
+[server]
+headless = true
+port = 8501
+
+[browser]
+gatherUsageStats = false

@@ -7,7 +7,7 @@
       "eth_address": null,
       "email": "admin@harmlens.ai",
       "created_at": "2026-02-07T16:57:55.685912",
-      "last_login": "2026-02-07T18:02:51.104199",
+      "last_login": "2026-02-07T18:36:18.071001",
       "permissions": [
         "view_content",
         "analyze_content",
@@ -28,7 +28,7 @@
       "eth_address": "0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb",
       "email": "moderator@harmlens.ai",
       "created_at": "2026-02-07T23:00:00",
-      "last_login": "2026-02-07T18:07:55.893322",
+      "last_login": "2026-02-07T18:42:38.465435",
       "permissions": [
         "view_content",
         "analyze_content",

@@ -322,7 +322,7 @@ if 'page' not in st.session_state:
 
 
 def api_request(endpoint, method="GET", data=None, auth_required=True):
-    """Make API request with authentication"""
+    """Make API request with authentication and retry logic"""
     headers = {"Content-Type": "application/json"}
     
     if auth_required and st.session_state.token:
@@ -330,26 +330,78 @@ def api_request(endpoint, method="GET", data=None, auth_required=True):
     
     url = f"{API_BASE}{endpoint}"
     
-    try:
-        if method == "GET":
-            response = requests.get(url, headers=headers)
-        elif method == "POST":
-            response = requests.post(url, headers=headers, json=data)
-        
-        if response.status_code == 401:
-            st.session_state.token = None
-            st.session_state.user = None
-            st.error("Session expired. Please login again.")
+    # Retry logic for connection issues
+    max_retries = 3
+    retry_delay = 0.5
+    
+    for attempt in range(max_retries):
+        try:
+            if method == "GET":
+                response = requests.get(url, headers=headers, timeout=10)
+            elif method == "POST":
+                response = requests.post(url, headers=headers, json=data, timeout=10)
+            
+            if response.status_code == 401:
+                st.session_state.token = None
+                st.session_state.user = None
+                st.error("Session expired. Please login again.")
+                return None
+            
+            if response.status_code == 200:
+                return response.json()
+            else:
+                if attempt < max_retries - 1:
+                    import time
+                    time.sleep(retry_delay)
+                    continue
+                return None
+                
+        except requests.exceptions.ConnectionError as e:
+            if attempt < max_retries - 1:
+                import time
+                time.sleep(retry_delay)
+                continue
+            else:
+                st.error(f"⚠️ Cannot connect to API server. Please ensure it's running on {API_BASE}")
+                st.info("Start the API server: `python api_server.py`")
+                return None
+        except requests.exceptions.Timeout:
+            if attempt < max_retries - 1:
+                import time
+                time.sleep(retry_delay)
+                continue
+            else:
+                st.error("⚠️ API request timed out. Please try again.")
+                return None
+        except Exception as e:
+            st.error(f"API Error: {e}")
             return None
-        
-        return response.json() if response.status_code == 200 else None
-    except Exception as e:
-        st.error(f"API Error: {e}")
-        return None
+    
+    return None
 
 
 def login_page():
     """Professional login page for moderators"""
+    
+    # Check API connection first
+    try:
+        test_response = requests.get(f"{API_BASE}/api/v1/blockchain/stats", timeout=2)
+        api_online = test_response.status_code == 200
+    except:
+        api_online = False
+    
+    if not api_online:
+        st.error("⚠️ API Server is not responding!")
+        st.warning("""
+        **Please start the API server:**
+        
+        ```bash
+        python api_server.py
+        ```
+        
+        Then refresh this page.
+        """)
+        st.stop()
     
     # Header - Generic for login page
     user_role = 'viewer'  # Default for login page
